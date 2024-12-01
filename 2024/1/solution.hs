@@ -41,12 +41,12 @@ removeFromList n l = helper n l []
 diff :: [(Int, Int)] -> [Int]
 diff = map (\el -> abs $ uncurry (-) el)
 
-apperanseCount :: Int -> [Int] -> Int
-apperanseCount _ [] = 0
-apperanseCount n (el : l) = if n == el then 1 + apperanseCount n l else apperanseCount n l
+countOccurrences :: Int -> [Int] -> Int
+countOccurrences _ [] = 0
+countOccurrences n (el : l) = if n == el then 1 + countOccurrences n l else countOccurrences n l
 
 secondPart :: [Int] -> [Int] -> Int
 secondPart [] [] = 0
 secondPart _ [] = 0
 secondPart [] _ = 0
-secondPart (el : l1) l2 = apperanseCount el l2 * el + secondPart l1 l2
+secondPart (el : l1) l2 = countOccurrences el l2 * el + secondPart l1 l2
