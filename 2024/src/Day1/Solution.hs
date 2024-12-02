@@ -1,15 +1,8 @@
-import Control.Monad
-import System.IO
-
-main = do
-  contents <- readFile "input.txt"
-  let input = words contents
-  let firstList = f1 input
-  let secondList = f2 input
-  let firstPartAnswer = sum $ diff $ pairMins firstList secondList
-  let secondPartAnswer = secondPart firstList secondList
-  print firstPartAnswer
-  print secondPartAnswer
+module Day1.Solution
+  ( firstPart,
+    secondPart,
+  )
+where
 
 f1 :: [String] -> [Int]
 f1 l = fHelper odd l 1
@@ -45,8 +38,24 @@ countOccurrences :: Int -> [Int] -> Int
 countOccurrences _ [] = 0
 countOccurrences n (el : l) = if n == el then 1 + countOccurrences n l else countOccurrences n l
 
-secondPart :: [Int] -> [Int] -> Int
-secondPart [] [] = 0
-secondPart _ [] = 0
-secondPart [] _ = 0
-secondPart (el : l1) l2 = countOccurrences el l2 * el + secondPart l1 l2
+firstPart :: FilePath -> IO ()
+firstPart filename = do
+  contents <- readFile filename
+  let input = words contents
+  let firstList = f1 input
+  let secondList = f2 input
+  print $ sum $ diff $ pairMins firstList secondList
+
+secondPart :: FilePath -> IO ()
+secondPart filename = do
+  contents <- readFile filename
+  let input = words contents
+  let firstList = f1 input
+  let secondList = f2 input
+  print $ secondPartHelper firstList secondList
+
+secondPartHelper :: [Int] -> [Int] -> Int
+secondPartHelper [] [] = 0
+secondPartHelper _ [] = 0
+secondPartHelper [] _ = 0
+secondPartHelper (el : l1) l2 = countOccurrences el l2 * el + secondPartHelper l1 l2
