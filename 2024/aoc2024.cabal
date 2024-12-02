@@ -59,7 +59,8 @@ library
     hs-source-dirs: src
     build-depends:    base ^>=4.17.2.1
     default-language: GHC2021
-    exposed-modules: Day1.Solution
+    exposed-modules: Day1.Solution,
+                     Day2.Solution
 
 executable aoc2024
     -- Import common warning flags.
