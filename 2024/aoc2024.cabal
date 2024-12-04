@@ -61,7 +61,8 @@ library
     default-language: GHC2021
     exposed-modules: Day1.Solution,
                      Day2.Solution,
-                     Day3.Solution
+                     Day3.Solution,
+                     Day4.Solution
 
 executable aoc2024
     -- Import common warning flags.
