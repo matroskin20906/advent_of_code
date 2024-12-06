@@ -5,7 +5,7 @@ module Day6.Solution
 where
 
 import Data.Bifunctor qualified
-import Data.Set (Set, empty, fromList, insert, member)
+import Data.Set (Set, delete, empty, findMin, fromList, insert, member, size)
 import Prelude hiding (Left, Right)
 
 data Movement = Up | Down | Left | Right
@@ -116,8 +116,18 @@ testNewMatrixs matrix coord =
                 + testNewMatrixs matrix newCoord
             else testNewMatrixs matrix newCoord
 
+testNewMatrixs2 :: [[Char]] -> Set (Int, Int) -> Int
+testNewMatrixs2 matrix steps =
+  let s = findMin steps
+   in if size steps == 0
+        then 0
+        else
+          if value matrix s == '.'
+            then testMatrix (updateMatrix (snd s) (fst s) '#' matrix) + testNewMatrixs2 matrix (delete s steps)
+            else testNewMatrixs2 matrix (delete s steps)
+
 secondPart :: FilePath -> IO ()
 secondPart filename = do
   contents <- readFile filename
   let matrix = lines contents
-  print $ testNewMatrixs matrix (0, 0)
+  print $ testNewMatrixs2 matrix (fromList $ makeSteps matrix (startPos matrix) Up)
