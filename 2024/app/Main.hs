@@ -6,6 +6,7 @@ import Day3.Solution as S3
 import Day4.Solution as S4
 import Day5.Solution as S5
 import Day6.Solution as S6
+import Day7.Solution as S7
 
 main :: IO ()
 main = do
@@ -19,5 +20,7 @@ main = do
   S4.secondPart "inputs/input4.txt"
   S5.firstPart "inputs/input5.txt"
   S5.secondPart "inputs/input5.txt"
-  S6.firstPart "inputs/input6.txt"
-  S6.secondPart "inputs/input6.txt"
+  S6.firstPart "inputs/input6.test"
+  S6.secondPart "inputs/input6.test"
+  S7.firstPart "inputs/input7.txt"
+  S7.secondPart "inputs/input7.txt"
