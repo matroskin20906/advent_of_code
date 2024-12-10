@@ -5,7 +5,7 @@ module Day10.Solution
 where
 
 import Data.Char (digitToInt)
-import Data.Set (Set, fromList)
+import Data.Set (fromList)
 import Prelude hiding (Left, Right)
 
 data Movement = Up | Down | Right | Left
@@ -61,19 +61,6 @@ process9 m ms t p =
                     ++ process9 m ms (digit - 1, right) (snd t : p)
             )
       )
-
-{- if isInMatrix ms up && digitToInt (m !! snd up !! fst up) == (fst t - 1)
-     then if fst t == 1 then up else process9 m ms (fst t - 1, up)
-     else
-       if isInMatrix ms down && digitToInt (m !! snd down !! fst down) == (fst t - 1)
-         then if fst t == 1 then down else process9 m ms (fst t - 1, down)
-         else
-           if isInMatrix ms left && digitToInt (m !! snd left !! fst left) == (fst t - 1)
-             then if fst t == 1 then left else process9 m ms (fst t - 1, left)
-             else
-               if isInMatrix ms right && digitToInt (m !! snd right !! fst right) == (fst t - 1)
-                 then if fst t == 1 then right else process9 m ms (fst t - 1, right)
-                 else (-1, -1) -}
 
 process9s :: [[Char]] -> Int -> [(Int, (Int, Int))] -> [[(Int, Int)]]
 process9s _ _ [] = []
