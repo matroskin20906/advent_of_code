@@ -10,36 +10,40 @@ import Day6.Solution as S6
 import Day7.Solution as S7
 import Day8.Solution as S8
 import Day9.Solution as S9
+import System.Environment (getArgs)
 
 main :: IO ()
 main = do
-  print "day 1:"
-  S1.firstPart "inputs/input1.txt"
-  S1.secondPart "inputs/input1.txt"
-  print "day 2:"
-  S2.firstPart "inputs/input2.txt"
-  S2.secondPart "inputs/input2.txt"
-  print "day 3:"
-  S3.firstPart "inputs/input3.txt"
-  S3.secondPart "inputs/input3.txt"
-  print "day 4:"
-  S4.firstPart "inputs/input4.txt"
-  S4.secondPart "inputs/input4.txt"
-  print "day 5:"
-  S5.firstPart "inputs/input5.txt"
-  S5.secondPart "inputs/input5.txt"
-  print "day 6:"
-  S6.firstPart "inputs/input6.test"
-  S6.secondPart "inputs/input6.test"
-  print "day 7:"
-  S7.firstPart "inputs/input7.txt"
-  S7.secondPart "inputs/input7.txt"
-  print "day 8:"
-  S8.firstPart "inputs/input8.txt"
-  S8.secondPart "inputs/input8.txt"
-  print "day 9:"
-  S9.firstPart "inputs/input9.test"
-  S9.secondPart "inputs/input9.test"
-  print "day 10:"
-  S10.firstPart "inputs/input10.txt"
-  S10.secondPart "inputs/input10.txt"
+  args <- getArgs
+  case args of
+    ["1"] -> do
+      S1.firstPart "inputs/input1.txt"
+      S1.secondPart "inputs/input1.txt"
+    ["2"] -> do
+      S2.firstPart "inputs/input2.txt"
+      S2.secondPart "inputs/input2.txt"
+    ["3"] -> do
+      S3.firstPart "inputs/input3.txt"
+      S3.secondPart "inputs/input3.txt"
+    ["4"] -> do
+      S4.firstPart "inputs/input4.txt"
+      S4.secondPart "inputs/input4.txt"
+    ["5"] -> do
+      S5.firstPart "inputs/input5.txt"
+      S5.secondPart "inputs/input5.txt"
+    ["6"] -> do
+      S6.firstPart "inputs/input6.test"
+      S6.secondPart "inputs/input6.test"
+    ["7"] -> do
+      S7.firstPart "inputs/input7.txt"
+      S7.secondPart "inputs/input7.txt"
+    ["8"] -> do
+      S8.firstPart "inputs/input8.txt"
+      S8.secondPart "inputs/input8.txt"
+    ["9"] -> do
+      S9.firstPart "inputs/input9.test"
+      S9.secondPart "inputs/input9.test"
+    ["10"] -> do
+      S10.firstPart "inputs/input10.txt"
+      S10.secondPart "inputs/input10.txt"
+    _ -> print "this solution does not exists"
