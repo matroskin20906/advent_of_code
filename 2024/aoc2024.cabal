@@ -67,7 +67,8 @@ library
                      Day6.Solution,
                      Day7.Solution,
                      Day8.Solution,
-                     Day9.Solution
+                     Day9.Solution,
+                     Day10.Solution
 
 executable aoc2024
     -- Import common warning flags.
