@@ -68,7 +68,9 @@ library
                      Day7.Solution,
                      Day8.Solution,
                      Day9.Solution,
-                     Day10.Solution
+                     Day10.Solution,
+                     Modules.Movements,
+                     Modules.Vectors
 
 executable aoc2024
     -- Import common warning flags.

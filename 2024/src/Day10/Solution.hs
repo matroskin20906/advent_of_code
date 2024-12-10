@@ -6,21 +6,11 @@ where
 
 import Data.Char (digitToInt)
 import Data.Set (fromList)
+import Modules.Movements (Movement (Down, Left, Right, Up), toVector)
 import Prelude hiding (Left, Right)
-
-data Movement = Up | Down | Right | Left
-
-toVector :: Movement -> (Int, Int)
-toVector Up = (0, -1)
-toVector Down = (0, 1)
-toVector Right = (1, 0)
-toVector Left = (-1, 0)
 
 sumVectors :: (Int, Int) -> (Int, Int) -> (Int, Int)
 sumVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
-
-sumVectorMovement :: (Int, Int) -> Movement -> (Int, Int)
-sumVectorMovement v m = sumVectors v (toVector m)
 
 isInMatrix :: Int -> (Int, Int) -> Bool
 isInMatrix s (x, y)
@@ -42,10 +32,10 @@ findAll9 m =
 
 process9 :: [[Char]] -> Int -> (Int, (Int, Int)) -> [(Int, Int)] -> [[(Int, Int)]]
 process9 m ms t p =
-  let up = sumVectorMovement (snd t) Up
-      down = sumVectorMovement (snd t) Down
-      left = sumVectorMovement (snd t) Left
-      right = sumVectorMovement (snd t) Right
+  let up = sumVectors (snd t) (toVector Up)
+      down = sumVectors (snd t) (toVector Down)
+      left = sumVectors (snd t) (toVector Left)
+      right = sumVectors (snd t) (toVector Right)
       x = fst (snd t)
       y = snd (snd t)
       digit = fst t
