@@ -28,9 +28,9 @@ value matrix (x, y) = matrix !! y !! x
 calcRegionPrice :: (Char, [(Int, Int)]) -> Int
 calcRegionPrice region = calcRegionArea region * calcRegionPerimeter region
 
-calcRegionSides :: (Char, [(Int, Int)]) -> [((Int, Int), (Int, Int))]
+calcRegionSides :: (Char, (Char, [(Int, Int)])) -> [((Int, Int), (Int, Int))]
 calcRegionSides region =
-  helper (snd region) (snd region)
+  helper (snd (snd region)) (snd (snd region))
   where
     helper :: [(Int, Int)] -> [(Int, Int)] -> [((Int, Int), (Int, Int))]
     helper [] _ = []
@@ -146,6 +146,28 @@ mapRegions m =
             then helper matrix (fst coord + 1, snd coord) ml res
             else helper matrix (fst coord + 1, snd coord) ml (findRegion matrix coord (value matrix coord) : res)
 
+mapRegionBorders reg =
+  (fst reg, helper (snd reg))
+  where
+    helper [] = []
+    helper (r : l) =
+      let up = step r (toVector Up)
+          down = step r (toVector Down)
+          left = step r (toVector Left)
+          right = step r (toVector Right)
+       in if not (elem up (snd reg))
+            then ('^', r) : helper l
+            else
+              if not (elem down (snd reg))
+                then ('v', r) : helper l
+                else
+                  if not (elem left (snd reg))
+                    then ('>', r) : helper l
+                    else
+                      if not (elem right (snd reg))
+                        then ('<', r) : helper l
+                        else ('-', r) : helper l
+
 firstPart :: FilePath -> IO ()
 firstPart file = do
   contents <- readFile file
@@ -164,4 +186,4 @@ secondPart file = do
   let regions = mapRegions matrix
   let areas = map calcRegionArea regions
   print areas
-  print $ calcRegionPrice2 areas (map countLines (map calcRegionSides regions))
+  print $ calcRegionPrice2 areas (map countLines (map calcRegionSides (map mapRegionBorders regions)))
