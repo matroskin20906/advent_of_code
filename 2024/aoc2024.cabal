@@ -70,6 +70,7 @@ library
                      Day9.Solution,
                      Day10.Solution,
                      Day11.Solution,
+                     Day12.Solution,
                      Modules.Movements,
                      Modules.Vectors
 

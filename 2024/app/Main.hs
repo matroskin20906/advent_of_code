@@ -3,6 +3,7 @@ module Main where
 import Day1.Solution as S1
 import Day10.Solution as S10
 import Day11.Solution as S11
+import Day12.Solution as S12
 import Day2.Solution as S2
 import Day3.Solution as S3
 import Day4.Solution as S4
@@ -50,4 +51,7 @@ main = do
     ["11"] -> do
       S11.firstPart "inputs/input11.txt"
       S11.secondPart "inputs/input11.txt"
+    ["12"] -> do
+      S12.firstPart "inputs/input12.test"
+      S12.secondPart "inputs/input12.test"
     _ -> print "this solution does not exists"
