@@ -4,7 +4,7 @@ module Day12.Solution
   )
 where
 
-import Data.List (deleteBy, sortOn)
+import Data.List (sortOn)
 import Modules.Movements (Movement (Down, Left, Right, Up), toVector)
 import Prelude hiding (Left, Right)
 
@@ -28,9 +28,9 @@ value matrix (x, y) = matrix !! y !! x
 calcRegionPrice :: (Char, [(Int, Int)]) -> Int
 calcRegionPrice region = calcRegionArea region * calcRegionPerimeter region
 
-calcRegionSides :: (Char, (Char, [(Int, Int)])) -> [((Int, Int), (Int, Int))]
+calcRegionSides :: (Char, [(Int, Int)]) -> [((Int, Int), (Int, Int))]
 calcRegionSides region =
-  helper (snd (snd region)) (snd (snd region))
+  helper (snd region) (snd region)
   where
     helper :: [(Int, Int)] -> [(Int, Int)] -> [((Int, Int), (Int, Int))]
     helper [] _ = []
@@ -38,7 +38,27 @@ calcRegionSides region =
       regionBorders coord r ++ helper tl r
 
 countLines :: [((Int, Int), (Int, Int))] -> Int
-countLines linesParts = length (makeLinesX linesParts) + length (makeLinesY linesParts)
+countLines linesParts =
+  let linesX = makeLinesX linesParts
+      linesY = makeLinesY linesParts
+   in 2 * length (filter (\el -> length el /= 0) (getAllCrosses linesX linesY)) + length linesX + length linesY
+
+getAllCrosses :: (Ord a1, Ord a2, Ord a3, Ord a4) => [((a1, a2), (a3, a4))] -> [((a1, a2), (a3, a4))] -> [(((a1, a2), (a3, a4)), ((a1, a2), (a3, a4)))]
+getAllCrosses [] _ = []
+getAllCrosses (lineX : linesX) linesY =
+  let crosses = getCrosses lineX linesY
+   in if crosses == []
+        then getAllCrosses linesX linesY
+        else crosses ++ getAllCrosses linesX linesY
+
+getCrosses :: (Ord a1, Ord a2, Ord a3, Ord a4) => ((a1, a2), (a3, a4)) -> [((a1, a2), (a3, a4))] -> [(((a1, a2), (a3, a4)), ((a1, a2), (a3, a4)))]
+getCrosses _ [] = []
+getCrosses lineX (lineY : linesY) =
+  if isCross lineX lineY then (lineX, lineY) : getCrosses lineX linesY else getCrosses lineX linesY
+
+isCross :: (Ord a1, Ord a2, Ord a3, Ord a4) => ((a1, a2), (a3, a4)) -> ((a1, a2), (a3, a4)) -> Bool
+isCross ((xx1, xx2), (xy1, xy2)) ((yx1, yx2), (yy1, yy2)) =
+  xx1 < yx1 && xx2 > yx2 && yy1 < xy1 && yy2 > xy2
 
 makeLinesX :: [((Int, Int), (Int, Int))] -> [((Int, Int), (Int, Int))]
 makeLinesX [] = []
@@ -146,28 +166,6 @@ mapRegions m =
             then helper matrix (fst coord + 1, snd coord) ml res
             else helper matrix (fst coord + 1, snd coord) ml (findRegion matrix coord (value matrix coord) : res)
 
-mapRegionBorders reg =
-  (fst reg, helper (snd reg))
-  where
-    helper [] = []
-    helper (r : l) =
-      let up = step r (toVector Up)
-          down = step r (toVector Down)
-          left = step r (toVector Left)
-          right = step r (toVector Right)
-       in if not (elem up (snd reg))
-            then ('^', r) : helper l
-            else
-              if not (elem down (snd reg))
-                then ('v', r) : helper l
-                else
-                  if not (elem left (snd reg))
-                    then ('>', r) : helper l
-                    else
-                      if not (elem right (snd reg))
-                        then ('<', r) : helper l
-                        else ('-', r) : helper l
-
 firstPart :: FilePath -> IO ()
 firstPart file = do
   contents <- readFile file
@@ -185,5 +183,4 @@ secondPart file = do
   let matrix = lines contents
   let regions = mapRegions matrix
   let areas = map calcRegionArea regions
-  print areas
-  print $ calcRegionPrice2 areas (map countLines (map calcRegionSides (map mapRegionBorders regions)))
+  print $ calcRegionPrice2 areas (map countLines (map calcRegionSides regions))
