@@ -37,8 +37,24 @@ calcRegionSides region =
     helper (coord : tl) r =
       regionBorders coord r ++ helper tl r
 
-countLines :: [((Int, Int), (Int, Int))] -> Int
-countLines linesParts = length (makeLinesX linesParts) + length (makeLinesY linesParts)
+countLines linesParts =
+  let linesX = makeLinesX linesParts
+      linesY = makeLinesY linesParts
+   in 2 * length (filter (\el -> length el /= 0) (getAllCrosses linesX linesY)) + length linesX + length linesY
+
+getAllCrosses [] _ = []
+getAllCrosses (lineX : linesX) linesY =
+  let crosses = getCrosses lineX linesY
+   in if crosses == []
+        then getAllCrosses linesX linesY
+        else crosses ++ getAllCrosses linesX linesY
+
+getCrosses _ [] = []
+getCrosses lineX (lineY : linesY) =
+  if isCross lineX lineY then (lineX, lineY) : getCrosses lineX linesY else getCrosses lineX linesY
+
+isCross ((xx1, xx2), (xy1, xy2)) ((yx1, yx2), (yy1, yy2)) =
+  xx1 < yx1 && xx2 > yx2 && yy1 < xy1 && yy2 > xy2
 
 makeLinesX :: [((Int, Int), (Int, Int))] -> [((Int, Int), (Int, Int))]
 makeLinesX [] = []
@@ -163,5 +179,4 @@ secondPart file = do
   let matrix = lines contents
   let regions = mapRegions matrix
   let areas = map calcRegionArea regions
-  print areas
   print $ calcRegionPrice2 areas (map countLines (map calcRegionSides regions))

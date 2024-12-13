@@ -53,5 +53,5 @@ main = do
       S11.secondPart "inputs/input11.txt"
     ["12"] -> do
       S12.firstPart "inputs/input12.txt"
-      S12.secondPart "inputs/input12.test"
+      S12.secondPart "inputs/input12.txt"
     _ -> print "this solution does not exists"
