@@ -6,6 +6,7 @@ import Day11.Solution as S11
 import Day12.Solution as S12
 import Day13.Solution as S13
 import Day14.Solution as S14
+import Day15.Solution as S15
 import Day2.Solution as S2
 import Day3.Solution as S3
 import Day4.Solution as S4
@@ -62,4 +63,7 @@ main = do
     ["14"] -> do
       S14.firstPart "inputs/input14.txt"
       S14.secondPart "inputs/input14.txt"
+    ["15"] -> do
+      S15.firstPart "inputs/input15.txt"
+      S15.secondPart "inputs/input15.txt"
     _ -> print "this solution does not exists"
