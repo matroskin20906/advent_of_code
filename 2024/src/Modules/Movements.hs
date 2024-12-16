@@ -1,6 +1,7 @@
 module Modules.Movements
   ( toVector,
     turnRight,
+    turnLeft,
     Movement (..),
   )
 where
@@ -14,6 +15,12 @@ turnRight Up = Right
 turnRight Right = Down
 turnRight Down = Left
 turnRight Left = Up
+
+turnLeft :: Movement -> Movement
+turnLeft Up = Left
+turnLeft Right = Up
+turnLeft Left = Down
+turnLeft Down = Right
 
 instance Eq Movement where
   m1 == m2 = fst (toVector m1) == fst (toVector m2) && snd (toVector m1) == snd (toVector m2)

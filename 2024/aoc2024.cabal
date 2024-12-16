@@ -57,7 +57,7 @@ common warnings
 library
     import:           warnings
     hs-source-dirs: src
-    build-depends:    base ^>=4.17.2.1, regex-posix, containers
+    build-depends:    base ^>=4.17.2.1, regex-posix, containers, heap
     default-language: GHC2021
     exposed-modules: Day1.Solution,
                      Day2.Solution,
@@ -74,6 +74,7 @@ library
                      Day13.Solution,
                      Day14.Solution,
                      Day15.Solution,
+                     Day16.Solution,
                      Modules.Movements,
                      Modules.Vectors
 
@@ -91,7 +92,7 @@ executable aoc2024
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.17.2.1, aoc2024
+    build-depends:    base ^>=4.17.2.1, aoc2024, containers
 
     -- Directories containing source files.
     hs-source-dirs:   app
