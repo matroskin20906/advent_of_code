@@ -6,7 +6,7 @@ import org.example.solution.Solution
 import java.io.File
 import kotlin.system.exitProcess
 
-fun main(args : Array<String>) {
+fun main(args: Array<String>) {
     if (args.size < 3) {
         println("u should give day as first argument, part as second and input file as third")
         exitProcess(1)
@@ -15,7 +15,7 @@ fun main(args : Array<String>) {
     val part = args[1]
     val inputFile = args[2]
 
-    val solution : Solution = when (day) {
+    val solution: Solution = when (day) {
         "1" -> Day1()
         "2" -> Day2()
         else -> TODO("not implemented")

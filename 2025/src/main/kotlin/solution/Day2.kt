@@ -1,9 +1,9 @@
 package org.example.solution
 
 class Day2 : Solution {
-    private var invalidIdSum : Long = 0
+    private var invalidIdSum: Long = 0
 
-    private fun processNumberPart1(number : Long) {
+    private fun processNumberPart1(number: Long) {
         val numberAsString = number.toString()
         if (numberAsString.length % 2 != 0) {
             return
@@ -19,7 +19,7 @@ class Day2 : Solution {
         invalidIdSum += number
     }
 
-    private fun processNumberPart2(number : Long) {
+    private fun processNumberPart2(number: Long) {
         val numberAsString = number.toString()
         var numberPart = ""
         for (digit in numberAsString) {
@@ -40,14 +40,14 @@ class Day2 : Solution {
         }
     }
 
-    private fun processOneRange(from : Long, to : Long, processFunction: (number: Long) -> Unit) {
+    private fun processOneRange(from: Long, to: Long, processFunction: (number: Long) -> Unit) {
         for (i in from..to) {
             processFunction(i)
         }
     }
 
     override fun partOne(lines: List<String>): String {
-        val idRangeLine : String = lines[0]
+        val idRangeLine: String = lines[0]
         val idRanges = idRangeLine.split(",")
         idRanges.forEach {
             val splitLine = it.split("-")
@@ -58,7 +58,7 @@ class Day2 : Solution {
     }
 
     override fun partTwo(lines: List<String>): String {
-        val idRangeLine : String = lines[0]
+        val idRangeLine: String = lines[0]
         val idRanges = idRangeLine.split(",")
         idRanges.forEach {
             val splitLine = it.split("-")
