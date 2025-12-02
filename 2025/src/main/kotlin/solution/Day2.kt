@@ -1,7 +1,7 @@
 package org.example.solution
 
 class Day2 : Solution {
-    var invalidIdSum : Long = 0;
+    private var invalidIdSum : Long = 0
 
     private fun processNumberPart1(number : Long) {
         val numberAsString = number.toString()
