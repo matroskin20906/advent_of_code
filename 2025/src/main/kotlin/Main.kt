@@ -2,6 +2,7 @@ package org.example
 
 import org.example.solution.Day1
 import org.example.solution.Day2
+import org.example.solution.Day3
 import org.example.solution.Solution
 import java.io.File
 import kotlin.system.exitProcess
@@ -18,6 +19,7 @@ fun main(args: Array<String>) {
     val solution: Solution = when (day) {
         "1" -> Day1()
         "2" -> Day2()
+        "3" -> Day3()
         else -> TODO("not implemented")
     }
 
