@@ -5,6 +5,9 @@ import org.example.solution.Day2
 import org.example.solution.Day3
 import org.example.solution.Day4
 import org.example.solution.Day5
+import org.example.solution.Day6
+import org.example.solution.Day7
+import org.example.solution.Day8
 import org.example.solution.Solution
 import java.io.File
 import kotlin.system.exitProcess
@@ -24,6 +27,9 @@ fun main(args: Array<String>) {
         "3" -> Day3()
         "4" -> Day4()
         "5" -> Day5()
+        "6" -> Day6()
+        "7" -> Day7()
+        "8" -> Day8()
         else -> TODO("not implemented")
     }
 
