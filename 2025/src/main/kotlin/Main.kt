@@ -3,6 +3,7 @@ package org.example
 import org.example.solution.Day1
 import org.example.solution.Day10
 import org.example.solution.Day11
+import org.example.solution.Day12
 import org.example.solution.Day2
 import org.example.solution.Day3
 import org.example.solution.Day4
@@ -36,6 +37,7 @@ fun main(args: Array<String>) {
         "9" -> Day9()
         "10" -> Day10()
         "11" -> Day11()
+        "12" -> Day12()
         else -> TODO("not implemented")
     }
 
