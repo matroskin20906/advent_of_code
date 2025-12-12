@@ -12,10 +12,8 @@ class Day12 : Solution {
 
         return regions.count { region ->
             val area = region.width * region.height
-            var neededArea = 0
-            for (i in region.shapesToPresent.indices) {
-                neededArea += figuresArea[i] * region.shapesToPresent[i]
-            }
+            val neededArea = region.shapesToPresent.indices
+                .sumOf { i -> figuresArea[i] * region.shapesToPresent[i] }
 
             neededArea <= area
         }.toString()
